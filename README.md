@@ -53,3 +53,21 @@ if ($payment->validate($_GET) {
 }
 ...
 ```
+
+Check payment on Success page:
+```php
+...
+$payment = new \Idma\Robokassa\Payment(
+    'john_doe', 'password1', 'password2', true
+);
+
+if ($payment->validate($_GET, "payment") {
+    $order = Orders::find($payment->getInvoiceId());
+
+    if ($payment->getSum() == $order->sum) {
+        // payment is valid
+    }
+
+}
+...
+```

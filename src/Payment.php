@@ -116,19 +116,20 @@ class Payment {
     /**
      * Validates the Robokassa query.
      *
-     * @param  string $data query data
+     * @param  string $data           query data
+     * @param  string $passwordType   type of password, "validation" or "payment"
      *
      * @return bool
      */
-    public function validate($data)
+    public function validate($data, $passwordType = "validation")
     {
         $this->data = $data;
-
+        $password = $this->{"{$passwordType}Password"};
         $signature = vsprintf('%s:%u:%s%s', [
             // '$OutSum:$InvId:$password[:$params]'
             $data['OutSum'],
             $data['InvId'],
-            $this->validationPassword,
+            $password,
             $this->getCustomParamsString($this->data)
         ]);
 
