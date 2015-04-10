@@ -41,7 +41,7 @@ $payment = new \Idma\Robokassa\Payment(
     'john_doe', 'password1', 'password2', true
 );
 
-if ($payment->validate($_GET) {
+if ($payment->validateResult($_GET) {
     $order = Orders::find($payment->getInvoiceId());
 
     if ($payment->getSum() == $order->sum) {
@@ -54,14 +54,15 @@ if ($payment->validate($_GET) {
 ...
 ```
 
-Check payment on Success page:
+Check payment on Success or Fail page:
 ```php
 ...
 $payment = new \Idma\Robokassa\Payment(
     'john_doe', 'password1', 'password2', true
 );
 
-if ($payment->validate($_GET, "payment") {
+// if ($payment->validateFail($_GET) {
+if ($payment->validateSuccess($_GET) {
     $order = Orders::find($payment->getInvoiceId());
 
     if ($payment->getSum() == $order->sum) {

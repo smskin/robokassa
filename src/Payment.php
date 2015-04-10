@@ -40,10 +40,10 @@ class Payment {
     /**
      * Class constructor.
      *
-     * @param string $login              login of Merchant
-     * @param string $paymentPassword    password #1
-     * @param string $validationPassword password #2
-     * @param bool   $testMode           use test server
+     * @param  string $login              login of Merchant
+     * @param  string $paymentPassword    password #1
+     * @param  string $validationPassword password #2
+     * @param  bool   $testMode           use test server
      */
     public function __construct($login, $paymentPassword, $validationPassword, $testMode = false)
     {
@@ -114,17 +114,55 @@ class Payment {
     }
 
     /**
-     * Validates the Robokassa query.
+     * Validates on ResultURL.
      *
-     * @param  string $data           query data
-     * @param  string $passwordType   type of password, "validation" or "payment"
+     * @param  string $data query data
      *
      * @return bool
      */
-    public function validate($data, $passwordType = "validation")
+    public function validateResult($data)
+    {
+        return $this->validate($data);
+    }
+
+    /**
+     * Validates on SuccessURL.
+     *
+     * @param  string $data query data
+     *
+     * @return bool
+     */
+    public function validateSuccess($data)
+    {
+        return $this->validate($data, 'payment');
+    }
+
+    /**
+     * Validates on FailURL.
+     *
+     * @param  string $data query data
+     *
+     * @return bool
+     */
+    public function validateFail($data)
+    {
+        return $this->validate($data, 'payment');
+    }
+
+    /**
+     * Validates the Robokassa query.
+     *
+     * @param  string $data         query data
+     * @param  string $passwordType type of password, 'validation' or 'payment'
+     *
+     * @return bool
+     */
+    private function validate($data, $passwordType = 'validation')
     {
         $this->data = $data;
-        $password = $this->{"{$passwordType}Password"};
+
+        $password = $this->{$passwordType . 'Password'};
+
         $signature = vsprintf('%s:%u:%s%s', [
             // '$OutSum:$InvId:$password[:$params]'
             $data['OutSum'],
@@ -223,7 +261,7 @@ class Payment {
     }
 
     /**
-     * @param $summ
+     * @param  mixed $summ
      *
      * @throws InvalidSumException
      *
@@ -251,7 +289,7 @@ class Payment {
     }
 
     /**
-     * @param $description
+     * @param  string $description
      *
      * @return Payment
      */
