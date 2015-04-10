@@ -138,18 +138,6 @@ class Payment {
     }
 
     /**
-     * Validates on FailURL.
-     *
-     * @param  string $data query data
-     *
-     * @return bool
-     */
-    public function validateFail($data)
-    {
-        return $this->validate($data, 'payment');
-    }
-
-    /**
      * Validates the Robokassa query.
      *
      * @param  string $data         query data
