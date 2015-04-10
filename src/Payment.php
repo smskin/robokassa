@@ -221,16 +221,21 @@ class Payment {
     }
 
     /**
-     * @param  string $name - custom param name, without shp_
-     * 
+     * Get custom parameter from payment data.
+     *
+     * @param  string  $name  parameter name without "shp_"
+     *
      * @return mixed
      */
-    public function getCustomParam($name) {
+    public function getCustomParam($name)
+    {
         $key = 'shp_' . $name;
-        if(!isset($this->data[$key])) {
-            return null;
+
+        if (isset($this->data[$key])) {
+            return $this->data[$key];
         }
-        return $this->data[$key];
+
+        return null;
     }
 
     /**
