@@ -54,14 +54,13 @@ if ($payment->validateResult($_GET) {
 ...
 ```
 
-Check payment on Success or Fail page:
+Check payment on Success page:
 ```php
 ...
 $payment = new \Idma\Robokassa\Payment(
     'john_doe', 'password1', 'password2', true
 );
 
-// if ($payment->validateFail($_GET) {
 if ($payment->validateSuccess($_GET) {
     $order = Orders::find($payment->getInvoiceId());
 
