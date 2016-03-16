@@ -53,7 +53,7 @@ class Payment {
         $this->isTestMode         = $testMode;
 
         if ($this->isTestMode) {
-            $this->baseUrl = 'http://test.robokassa.ru/Index.aspx?';
+            $this->baseUrl = 'https://auth.robokassa.ru/Merchant/Index.aspx?';
         }
 
         $this->data = [
