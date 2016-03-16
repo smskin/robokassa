@@ -1,5 +1,5 @@
 {
-    "name": "idma/robokassa",
+    "name": "smskin/robokassa",
     "description": "PHP library for Robokassa payment system",
     "keywords": ["idma", "robokassa", "payment"],
     "homepage": "https://github.com/idma/robokassa",
