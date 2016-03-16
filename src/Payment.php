@@ -65,6 +65,7 @@ class Payment {
             'Encoding'       => 'utf-8',
             'Culture'        => self::CULTURE_RU,
             'IncCurrLabel'   => '',
+            'isTest'=>(int)$testMode
         ];
     }
 
